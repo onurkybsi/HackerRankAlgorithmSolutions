@@ -3,25 +3,20 @@
 #include <string.h>
 #include <math.h>
 
-int saveThePrisoner(int n, int m, int s) {
 
-    int i = s;
+int saveThePrisoner(int n, int m, int s)
+{
+    int result = (m+s-1) % n;
 
-    while (m != 1)
-    {
-        if(i == n)  i = 0; 
-
-        m--;
-        i++;
-    }
-    
-    return i;
+    if(result == 0)
+        return n;
+    else
+        return result;
 }
 
 int main(){
 
-    printf("%d",saveThePrisoner(3,7,3));
-
+ 
     system("PAUSE");
 
     return 0;
