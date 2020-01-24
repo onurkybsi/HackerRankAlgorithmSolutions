@@ -5,17 +5,7 @@
 
 int squares(int a, int b) {
 
-    int result = 0;
-    double isThatTrue;
-
-    for (int i = a; i <= b; i++)
-    {
-        isThatTrue = sqrt((double)i);
-
-        if(isThatTrue == (int)(i/isThatTrue))    result++;
-    }
-
-    return result;
+    return  (int)(floor(sqrt(b))-ceil(sqrt(a))+1);
 }
 
 
