@@ -31,11 +31,6 @@ int workbook(int n, int k, int arr_count, int* arr) {
 
 int main(){
 
-
-    int deneme[15] = {1, 8, 19, 15, 2, 29, 3, 2, 25, 2, 19, 26, 17, 33, 22};
-
-    workbook(15,20,15,deneme);
-
     system("PAUSE");
 
     return 0;
