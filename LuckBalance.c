@@ -2,53 +2,49 @@
 #include <stdlib.h>
 #include <string.h>
 
-int luckBalance(int k, int contests_rows, int contests_columns, int** contests) {
+int luckBalance(int k, int contests_rows, int contests_columns, int **contests)
+{
 
-    int i = 0;
-    int temp = -1;
-    int check = 1;
     int result = 0;
+    int temp;
+    int j = 0;
+
+    for (int i = 0; i < contests_rows; i++)
+    {
+        if (contests[i][1] == 1)
+            result -= contests[i][0];
+        else
+            result += contests[i][0];
+    }
 
     while (k > 0)
     {
-        if(contests[i][1] == 1){
-
-            check = 1;
-
-            for(int j = 0; j < contests_rows; j++){
-
-                if(contests[j][0] > contests[i][0] && j != temp){
-                    check = 0;
-                    break;
-                }
-            }
-
-            if(check == 1 && k > 0){
-                k--;
-                result += contests[i][0];
-                temp = i;
-            }
-            else
-            {
-                result -= contests[i][0];
-            }
-        }
-        else
+        for (j = 0; j < contests_rows - 1; j++)
         {
-            result += contests[i][0];
+
+            if (contests[j][1] == 0)
+                continue;
+
+            if (contests[j] > contests[j + 1])
+            {
+
+                temp = contests[j];
+                contests[j] = contests[j + 1];
+                contests[j + 1] = temp;
+            }
         }
 
-        i = (i+1) % contests_rows;
+        result += contests[j + 1][0] * 2;
+        k--;
     }
 
     return result;
 }
 
-int main(){
-
+int main()
+{
 
     system("PAUSE");
 
     return 0;
-
 }
