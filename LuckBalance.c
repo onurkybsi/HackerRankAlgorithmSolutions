@@ -6,37 +6,47 @@ int luckBalance(int k, int contests_rows, int contests_columns, int **contests)
 {
 
     int result = 0;
-    int temp;
-    int j = 0;
+    int i = 0;
+    int tmp;
 
-    for (int i = 0; i < contests_rows; i++)
+    for (i = 0; i < contests_rows; i++)
     {
-        if (contests[i][1] == 1)
-            result -= contests[i][0];
-        else
-            result += contests[i][0];
-    }
+        int sirali = 1;
 
-    while (k > 0)
-    {
-        for (j = 0; j < contests_rows - 1; j++)
+        for (int j = contests_rows - 1; j > i; j--)
         {
-
-            if (contests[j][1] == 0)
-                continue;
-
-            if (contests[j] > contests[j + 1])
+            if (contests[j - 1][0] > contests[j][0])
             {
-
-                temp = contests[j];
-                contests[j] = contests[j + 1];
-                contests[j + 1] = temp;
+                sirali = 0;
+                tmp = contests[j - 1][0];
+                contests[j - 1][0] = contests[j][0];
+                contests[j][0] = tmp;
             }
         }
 
-        result += contests[j + 1][0] * 2;
-        k--;
+        if (sirali) break;
     }
+
+    i = contests_rows - 1;
+    tmp = k;
+
+    while (i >= 0)
+    {
+        if(contests[i][1] == 0)
+            result += contests[i][0];
+        else if(tmp > 0)
+        {
+            result += contests[i][0];
+            tmp--;
+        }
+        else
+        {
+            result -= contests[i][0];
+        }
+        
+        i--;
+    }
+    
 
     return result;
 }
