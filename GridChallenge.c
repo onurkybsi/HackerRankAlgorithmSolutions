@@ -6,12 +6,13 @@
 char *gridChallenge(int grid_count, char **grid)
 {
     char temp;
+    int countOfColumn = strlen(grid[0]);
 
     for (int i = 0; i < grid_count; i++)
     {
-        for(int j = 0; j < grid_count - 1; j++)
+        for(int j = 0; j < countOfColumn - 1; j++)
         {
-            for(int k = 0; k < grid_count - 1; k++)
+            for(int k = 0; k < countOfColumn - 1 - j; k++)
             {
                 if (grid[i][k] > grid[i][k + 1])
                 {
@@ -20,9 +21,8 @@ char *gridChallenge(int grid_count, char **grid)
                     grid[i][k + 1] = temp;
                 }
             }
-            printf("%c", grid[i][grid_count - 1 - j]);
 
-            if (grid[i][grid_count - 1 - j] > grid[i + 1][grid_count - 1 - j])
+            if ((i + 1 != grid_count - 1) && (grid[i][countOfColumn - 1 - j] > grid[i + 1][countOfColumn - 1 - j]))
                 return "NO";
         }
     }
@@ -36,13 +36,13 @@ int main()
     int k = 0;
     char temp;
 
-    char grid[3][3] = {{'m', 'p', 'x'}, {'a', 'b', 'c'}, {'w', 'l', 'm'}};
+    char grid[3][3] = {{'m', 'x', 'p'}, {'b', 'c', 'a'}, {'w', 'm', 'l'}};
 
     for (int i = 0; i < 3; i++)
     {
         for(j = 0; j < 2; j++)
         {
-            for(k = 0; k < 2; k++)
+            for(k = 0; k < 2 - j; k++)
             {
                 if (grid[i][k] > grid[i][k + 1])
                 {
@@ -52,7 +52,7 @@ int main()
                 }
             }
 
-            printf("%c", grid[i][2 - j]);
+            printf("%c\n", grid[i][2 - j]);
         }
     }
 
